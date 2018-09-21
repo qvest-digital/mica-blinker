@@ -40,15 +40,13 @@ class Player : public Node {
                 velocity = 0;
             }
 
-            // exception 10th
-            if(pos < 100 && pos > 90) {
-                // pixels[pos] = CHSV(0, 255, 200);
-                // TODO remove position
-                explosion.position = 20;
-                explosion.phase = pos - 90;
+            if(pos < 100 && pos > 70) {
+                // pixels[100 - pos] = CHSV(0, lround(255 * pos / 144), value);
+                explosion.phase = pos - 70;
+                explosion.position = 50;
                 explosion.render(pixels);
             } else {
-                pixels[pos] = CHSV(hue, saturation, value);
+                // pixels[pos] = CHSV(hue, lround(255 * pos / 144), value);
             }
         }
 };
