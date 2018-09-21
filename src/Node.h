@@ -20,7 +20,7 @@ public:
 
         Node(const float position, const float velocity, const uint8_t hue): position(position), velocity(velocity), hue(hue) {
             saturation = 255;
-            value = 255;
+            value = 50;
         }
 
         virtual void tick() = 0;

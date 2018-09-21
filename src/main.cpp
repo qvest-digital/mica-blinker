@@ -25,7 +25,9 @@ void loop() {
   fill_solid(frameBuffer, NUM_PIXELS, CRGB::Black);
   player.render(frameBuffer);
 
-  delay(500);
+  FastLED.show();
+
+  delay(10);
 }
 
 
