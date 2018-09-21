@@ -4,7 +4,7 @@
 #include "constants.h"
 #include "Player.h"
 
-Player player = Player(0, 0.01, 100);;
+Player player = Player(0, 0.01, 5);;
 
 CRGB frameBuffer[NUM_PIXELS];
 //CLEDController& ledController;
@@ -13,8 +13,6 @@ void  blink(int);
 void setup() {
   CLEDController& ledController = FastLED.addLeds<SK9822, BGR>(frameBuffer, NUM_PIXELS);
   ledController.clearLeds(NUM_PIXELS);
-  pinMode(13, OUTPUT);
-
 }
 
 void loop() {
