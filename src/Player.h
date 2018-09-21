@@ -1,32 +1,47 @@
-#ifndef __INC_PLAYER_H
-#define __INC_PLAYER_H
+#ifndef _PLAYER_H
+#define _PLAYER_H
 
-#include <Arduino.h>
+#include <stdint.h>
+#include "constants.h"
+#include "Node.h"
+#include "Direction.h"
 
-class Player {
+class Player : public Node {
 
-    uint8_t position;
-    uint8_t speed;
-
-    uint8_t hue;
-    uint8_t saturation;
-    uint8_t value;
+    Direction direction;
 
     public:
-        Player(uint8_t position, uint8_t hue): position(position), hue(hue){
-            speed = 16;
-            saturation = 64;
-            value = 64;
+
+        Player(const float position, const float velocity, const uint8_t hue) : Node(position, velocity, hue) {
+
         }
 
-        void moveForwards() {
-            position += speed;
+        void move(const Direction& direction) {
+            this->direction = direction;
+        }
+    
+        virtual void tick() {
+
+            switch(direction) {
+
+                case FORWARD:
+                position += velocity;
+                break;
+
+                case BACKWARD:
+                position -= velocity;
+                break;
+
+                default:
+                break;
+            }
         }
 
-        void moveBackwards() {
-            position -= speed;
-        }
+        virtual void render(const CRGB pixels[NUM_PIXELS]) {
 
+
+
+        }
 };
 
 #endif
