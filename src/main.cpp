@@ -7,18 +7,34 @@
 Player player = Player(0, 1, 100);;
 
 CRGB frameBuffer[NUM_PIXELS];
-//CLEDController& ledController;
 
 void setup() {
   CLEDController& ledController = FastLED.addLeds<SK9822, BGR>(frameBuffer, NUM_PIXELS);
   ledController.clearLeds(NUM_PIXELS);
 
+  // setup serial port
+  Serial.begin(9600); 
+
+  // initialize digital pins for input
+  pinMode(PIN_BUTTON_LEFT, INPUT_PULLUP);
+  pinMode(PIN_BUTTON_RIGHT, INPUT_PULLUP);
+
   // smoke test
   player.move(Direction::FORWARD);
+}
 
+void handleInputs() {
+
+  if (digitalRead(PIN_BUTTON_LEFT) == LOW) {
+    Serial.println("LEFT");
+  } else if (digitalRead(PIN_BUTTON_RIGHT) == LOW) {
+    Serial.println("RIGHT");
+  }
 }
 
 void loop() {
+
+  handleInputs();
 
   player.tick();
 
