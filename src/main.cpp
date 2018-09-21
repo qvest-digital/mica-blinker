@@ -1,9 +1,39 @@
 #include <Arduino.h>
+#include <FastLED.h>
+
+#define MAX_FPS  200
+#define NUM_LEDS 144
+
+static unsigned long FRAME_MICROS = 1000000 / MAX_FPS;
+
+static CRGB leds[NUM_LEDS];
 
 void setup() {
-    // put your setup code here, to run once:
+  CLEDController &controller = FastLED.addLeds<SK9822, BGR>(leds, NUM_LEDS);
+  controller.clearLeds(NUM_LEDS);
 }
 
 void loop() {
-    // put your main code here, to run repeatedly:
+  unsigned long startMicros = micros();
+
+  /////////////////////////////////////////////////////////////////////////////
+
+  // reset all leds
+  fill_solid(leds, NUM_LEDS, CRGB::Black);
+
+  // TODO
+
+  FastLED.show();
+
+  //////////////////////////////////////////////////////////////////////////////
+
+  unsigned long stopMicros = micros();
+
+  // sleep for remaining time of this frame to cap FPS
+  if (stopMicros >= startMicros) {
+    unsigned long durationMicros = stopMicros - startMicros;
+    if (durationMicros < FRAME_MICROS) {
+      delayMicroseconds(FRAME_MICROS - durationMicros);
+    }
+  }
 }
