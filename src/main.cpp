@@ -4,30 +4,28 @@
 #include "constants.h"
 #include "Player.h"
 
-Player player = Player(0, 1, 100);;
+Player player = Player(0, 0.01, 100);;
 
 CRGB frameBuffer[NUM_PIXELS];
 //CLEDController& ledController;
+void  blink(int);
 
 void setup() {
   CLEDController& ledController = FastLED.addLeds<SK9822, BGR>(frameBuffer, NUM_PIXELS);
   ledController.clearLeds(NUM_PIXELS);
-
-  // smoke test
-  player.move(Direction::FORWARD);
+  pinMode(13, OUTPUT);
 
 }
 
 void loop() {
-
   player.tick();
 
   fill_solid(frameBuffer, NUM_PIXELS, CRGB::Black);
   player.render(frameBuffer);
 
-  FastLED.show();
-
   delay(10);
+  FastLED.show();
+  
 }
 
 
