@@ -7,7 +7,6 @@
 Player player = Player(0, 1, 100);;
 
 CRGB frameBuffer[NUM_PIXELS];
-//CLEDController& ledController;
 
 void setup() {
   CLEDController& ledController = FastLED.addLeds<SK9822, BGR>(frameBuffer, NUM_PIXELS);
@@ -35,7 +34,6 @@ void loop() {
 // #define MAX_FPS  200
 // #define NUM_LEDS 144
 
-// static unsigned long FRAME_MICROS = 1000000 / MAX_FPS;
 
 // static CRGB leds[NUM_LEDS];
 

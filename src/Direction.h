@@ -3,8 +3,7 @@
 
 enum Direction {
     FORWARD,
-    BACKWARD,
-    NO_MOVE
+    BACKWARD
 };
 
 #endif
