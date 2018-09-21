@@ -26,8 +26,7 @@ void loop() {
   player.render(frameBuffer);
 
   FastLED.show();
-
-  delay(10);
+  delay(50);
 }
 
 
