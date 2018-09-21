@@ -3,8 +3,10 @@
 
 #include "constants.h"
 #include "Player.h"
+#include "fx/NuclearBlast.h"
 
 Player player = Player(0, 0.25f, 100);
+// NuclearBlast blast = NuclearBlast(40.0f);
 
 CRGB frameBuffer[NUM_PIXELS];
 
@@ -46,6 +48,8 @@ void loop() {
 
   player.tick();
   player.render(frameBuffer);
+  // blast.tick();
+  // blast.render(frameBuffer);
 
   FastLED.show();
 
