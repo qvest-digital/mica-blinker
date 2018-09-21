@@ -4,22 +4,25 @@
 #include <stdio.h>
 #include <FastLED.h>
 
-class Explosion : public Node() {
+class Explosion : public Node {
 
-    Explosion(const float position, const float velocity, const uint8_t hue) : Node(position, velocity, hue) {
-    }
+    public:
+        uint8_t phase;
 
-    virtual void tick() {
+        Explosion(const float position, const float velocity, const uint8_t hue, uint8_t phase) : Node(position, velocity, hue) {
+        };
 
-    }
-
-    virtual void render(CRGB pixels[NUM_PIXELS]) {
-        for (int i = 0;i < 4; i++) {
-            pixels[pos + i] = CHSV(hue, saturation, 50 - i * 10);
-            pixels[pos - i] = CHSV(hue, saturation, 50 - i * 10);
+        virtual void tick() {
         }
-    }
 
-}
+        virtual void render(CRGB pixels[NUM_PIXELS]) {
+            uint8_t pos = static_cast<uint8_t>(lround(position));
+            pixels[pos] = CHSV(hue, 100, 100);
+            for (int i = 0;i < phase; i++) {
+                pixels[pos + i] = CHSV(hue, 100, 50);
+                pixels[pos - i] = CHSV(hue, 100, 50);
+            }
+        }
+};
 
 #endif
