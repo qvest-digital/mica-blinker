@@ -25,7 +25,7 @@ public:
 
         virtual void tick() = 0;
 
-        virtual void render(const CRGB pixels[NUM_PIXELS]) = 0;
+        virtual void render(CRGB pixels[NUM_PIXELS]) = 0;
 
 };
 

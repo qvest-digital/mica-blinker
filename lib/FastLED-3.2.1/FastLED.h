@@ -180,6 +180,7 @@ class CFastLED {
 	power_func m_pPowerFunc;	///< function for overriding brightness when using FastLED.show();
 
 public:
+	
 	CFastLED();
 
 

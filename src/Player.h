@@ -2,6 +2,9 @@
 #define _PLAYER_H
 
 #include <stdint.h>
+#include <math.h>
+#include <FastLED.h>
+
 #include "constants.h"
 #include "Node.h"
 #include "Direction.h"
@@ -37,10 +40,14 @@ class Player : public Node {
             }
         }
 
-        virtual void render(const CRGB pixels[NUM_PIXELS]) {
+        virtual void render(CRGB pixels[NUM_PIXELS]) {
 
+             uint8_t pos = static_cast<uint8_t>(lround(position));
+            if(pos > NUM_PIXELS - 1) {
+                pos = 0;
+            }
 
-
+            pixels[pos] = CHSV(hue, saturation, value);
         }
 };
 
