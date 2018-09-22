@@ -24,8 +24,7 @@ void setup() {
 
   // set player to center
   world.addNode(new Player(NUM_PIXELS / 2, 0, 100));
-  world.addNode(new NuclearBlast(40.0f));
-
+  // world.addNode(new NuclearBlast(40.0f));
 }
 
 void handleInputs() {
