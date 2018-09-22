@@ -5,23 +5,18 @@
 #include "World.h"
 #include "Projectile.h"
 
-#define MIN_VELOCITY 1
-#define MAX_VELOCITY 100
-
-#define GAME_DURATION 120
-
 class Game {
 
     long frameCounter = 0;
 
     boolean spawn() {
-        long probability = map(frameCounter, 0, MAX_FPS * GAME_DURATION, 0, 255);
-        return random8() < probability;
+        // long probability = map(frameCounter, 0, MAX_FPS * GAME_DURATION, 1, 16);
+        return random16() < 100;
     }
 
     float velocity() {
-        long velocity = map(frameCounter, 0, MAX_FPS * GAME_DURATION, MIN_VELOCITY, MAX_VELOCITY);
-        return velocity / 100.0f;
+        float velocity = map(random8(), 0, 255, MIN_PROJECTILE_VELOCITY, MAX_PROJECTILE_VELOCITY) / PROJECTILE_VELOCITY_DIVIDER;
+        return velocity;
     }
 
     public:
@@ -34,7 +29,7 @@ class Game {
         }
         // spawn projectiles from right:
         if (spawn()) {
-            Projectile *projectile = new Projectile(0.0f, velocity(), random8());
+            Projectile *projectile = new Projectile(NUM_PIXELS-1, -velocity(), random8());
             world.addNode(projectile);
         }
 
