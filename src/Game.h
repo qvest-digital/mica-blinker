@@ -38,6 +38,7 @@ class Game {
     }
 
     void detectCollisions(World& world) {
+        
         Player* player = world.getPlayer();
         NodePtr* nodes = world.getNodes();
         
