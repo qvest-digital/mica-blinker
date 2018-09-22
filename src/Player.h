@@ -37,16 +37,18 @@ class Player : public Node {
             }
         }
 
-        virtual void render(CRGB pixels[NUM_PIXELS]) {
+        virtual void render(const Canvas& canvas) {
+            
             if (direction != NO_MOVE)
-            shield.render(pixels, position, direction);
+             shield.render(canvas, position, direction);
+            
             uint8_t pos = static_cast<uint8_t>(lround(position));
             if(pos > NUM_PIXELS - 1) {
                 pos = 0;
                 position = 0;
             }
 
-            pixels[pos] = CHSV(hue, saturation, value);
+            canvas.setPixel(pos, CHSV(hue, saturation, value));
         }
 };
 

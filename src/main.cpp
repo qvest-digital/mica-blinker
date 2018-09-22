@@ -2,20 +2,18 @@
 #include <FastLED.h>
 
 #include "constants.h"
+#include "Canvas.h"
 #include "Player.h"
 #include "World.h"
 #include "Game.h"
 #include "fx/NuclearBlast.h"
 #include "fx/Shield.h"
 
-CRGB frameBuffer[NUM_PIXELS];
-
-World world = World();
-Game game = Game();
+World world;
+Canvas canvas;
+Game game;
 
 void setup() {
-  CLEDController& ledController = FastLED.addLeds<SK9822, BGR>(frameBuffer, NUM_PIXELS);
-  ledController.clearLeds(NUM_PIXELS);
 
   // setup serial port
   Serial.begin(9600); 
@@ -48,15 +46,15 @@ void loop() {
   handleInputs();
 
   // reset all leds
-  fill_solid(frameBuffer, NUM_PIXELS, CRGB::Black);
+  canvas.clear();
 
   game.tick(world);
 
   world.tick();
   world.cleanup();
-  world.render(frameBuffer);
+  world.render(canvas);
 
-  FastLED.show();
+  canvas.show();
 
   //////////////////////////////////////////////////////////////////////////////
 

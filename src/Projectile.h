@@ -22,9 +22,9 @@ public:
         position += velocity;
     }
 
-    virtual void render(CRGB pixels[NUM_PIXELS]) {
+    virtual void render(const Canvas& canvas) {
         uint8_t pos = static_cast<uint8_t>(lround(position));
-        pixels[pos] = CHSV(hue, saturation, value);
+        canvas.addPixel(pos, CHSV(hue, saturation, value));
     }
 
 };

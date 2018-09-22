@@ -5,6 +5,7 @@
 #include <FastLED.h>
 
 #include "constants.h"
+#include "Canvas.h"
 
 class Node {
 
@@ -27,7 +28,7 @@ public:
 
     virtual void tick() = 0;
 
-    virtual void render(CRGB pixels[NUM_PIXELS]) = 0;
+    virtual void render(const Canvas& canvas) = 0;
 
     uint8_t getPos() { return position; }
 
