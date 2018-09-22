@@ -19,7 +19,7 @@ class World {
     }
 
     void addPlayer(Player* player) {
-        player = player;
+        this -> player = player;
         addNode(player);
     }
 

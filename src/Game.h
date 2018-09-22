@@ -4,6 +4,7 @@
 #include "constants.h"
 #include "World.h"
 #include "Projectile.h"
+#include "fx/NuclearBlast.h"
 
 class Game {
 
@@ -20,6 +21,8 @@ class Game {
     }
 
     public:
+
+    bool gameOver = false;
 
     void tick(World& world) {
         // spawn projectiles from left:
@@ -38,31 +41,32 @@ class Game {
     }
 
     void detectCollisions(World& world) {
-        
+
         Player* player = world.getPlayer();
         NodePtr* nodes = world.getNodes();
         
         // player->shieldHit(160);
 
-        uint16_t playerPos = lround(player->getPosition());
+        uint8_t playerPos = NUM_PIXELS / 2;
         Direction playerDir = player->direction;
         
-        for (uint16_t i = 0; i < MAX_NODES; i++) {
+        for (uint8_t i = 0; i < MAX_NODES; i++) {
             NodePtr node = nodes[i];
             if (node != NULL && node != player) {
-                uint16_t nodePos = lround(node->getPosition());
+                uint8_t nodePos = lround(node->getPosition());
 
-                if (playerPos == nodePos) {
-                    Serial.println("player hit");
-        //         //     player->hue = 0;
-                    player->shieldHit(160);
-        //         //     // node.die();
-        //         // } else
-        //         // if (playerDir == FORWARD /*&& playerPos + 3 == nodePos*/) {
-        //             // player->hue = 96;
-        //             // node->velocity = abs(node->velocity);
-        //         // } else {
-        //         //     player->hue = 160;
+                if (playerDir == FORWARD && playerPos + 3 == nodePos) {
+                    player->shieldHit(node->hue);
+                    node->velocity *= -1.0f;
+                    node->position += 10 * node->velocity;
+                } else if (playerDir == BACKWARD && playerPos - 3 == nodePos) {
+                    player->shieldHit(node->hue);
+                    node->velocity *= -1.0f;
+                    node->position += 10 * node->velocity;
+                } else if (playerPos == nodePos && !gameOver) {
+                    gameOver = true;
+                    world.addNode(new NuclearBlast(playerPos));
+                    player->die();
                 }
             }
         }

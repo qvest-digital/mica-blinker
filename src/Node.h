@@ -30,6 +30,10 @@ public:
 
     virtual void render(const Canvas& canvas) = 0;
 
+    void setHue(const uint8_t hue) {
+        this->hue = hue;
+    }
+
     uint8_t getPos() { return position; }
 
     float getPosition() { return position; }

@@ -12,6 +12,8 @@
 
 class Player : public Node {
 
+    bool dead = false;
+
     public:
 
         Direction direction;
@@ -33,6 +35,10 @@ class Player : public Node {
             } else {
                 direction = NO_MOVE;
             }
+        }
+
+        void die() {
+            // this->dead = true;
         }
 
         virtual void render(const Canvas& canvas) {
