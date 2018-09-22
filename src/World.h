@@ -10,8 +10,14 @@ class World {
 
     // the array holding all nodes
     NodePtr nodes[MAX_NODES];
+    Player *player;
 
     public:
+
+    void addPlayer(Player* player) {
+        player = player;
+        addNode(player);
+    }
 
     void addNode(Node* node) {
         // iterate over node array to find first empty slot
@@ -49,6 +55,9 @@ class World {
         }
     }
 
+    NodePtr* getNodes() { return nodes; }
+
+    Player* getPlayer() { return player; }
 };
 
 #endif

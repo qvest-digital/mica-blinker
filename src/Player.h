@@ -12,8 +12,6 @@
 
 class Player : public Node {
 
-    
-
     public:
 
         Direction direction;
@@ -50,6 +48,8 @@ class Player : public Node {
 
             canvas.setPixel(pos, CHSV(hue, saturation, value));
         }
+
+
 };
 
 #endif

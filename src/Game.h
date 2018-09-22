@@ -37,6 +37,27 @@ class Game {
         frameCounter++;
     }
 
+    void detectCollisions(World& world) {
+        Player* player = world.getPlayer();
+        NodePtr* nodes = world.getNodes();
+        
+        uint8_t playerPos = lround(player->getPosition());
+
+        for (uint16_t i = 0; MAX_NODES; i++) {
+            NodePtr node = nodes[i];
+            if (node != dynamic_cast<Node*>(player) && node != NULL) {
+                uint8_t nodePos = lround(node->getPosition());
+
+                if (nodePos < )
+                Direction playerDir = player->direction;
+                if (playerPos == nodePos) {
+                    player.hit();
+                    
+                }
+            }
+        }
+    }
+
 };
 
 #endif

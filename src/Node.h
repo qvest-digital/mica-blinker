@@ -32,6 +32,8 @@ public:
 
     uint8_t getPos() { return position; }
 
+    float getPosition() { return position; }
+
         virtual bool dead() {
             return false;
         }
