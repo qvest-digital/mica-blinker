@@ -54,22 +54,6 @@ class Player : public Node {
 
             pixels[pos] = CHSV(hue, saturation, value);
         }
-
-        void renderShield(CRGB pixels[NUM_PIXELS]) {
-            uint8_t color = 160;
-            uint16_t pos = static_cast<uint16_t>(lround(position));
-            
-            if (direction == FORWARD) {
-                pixels[pos + 2] += CHSV(color, 0, 20);
-                pixels[pos + 3] += CHSV(color, 200, 120);
-
-                pixels[pos - 2] += CHSV(color, 0, 20);
-                pixels[pos - 3] += CHSV(color, 200, 120);
-            } else if (direction == BACKWARD) {
-                pixels[pos - 2] += CHSV(color, 0, 20);
-                pixels[pos - 3] += CHSV(color, 200, 120);
-            }
-        }
 };
 
 #endif
