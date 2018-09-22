@@ -41,12 +41,13 @@ class Player : public Node {
             }
 
             if(pos < 100 && pos > 70) {
-                // pixels[100 - pos] = CHSV(0, lround(255 * pos / 144), value);
                 explosion.phase = pos - 70;
                 explosion.position = 50;
                 explosion.render(pixels);
+                FastLED.setBrightness(lround(255 * explosion.phase/30));
             } else {
-                // pixels[pos] = CHSV(hue, lround(255 * pos / 144), value);
+                FastLED.setBrightness(255);
+                pixels[pos] = CHSV(hue, lround(255 * pos / 144), value);
             }
         }
 };
