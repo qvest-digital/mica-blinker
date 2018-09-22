@@ -22,7 +22,7 @@ void setup() {
   pinMode(PIN_BUTTON_RIGHT, INPUT_PULLUP);
 
   // set player to center
-  world.addNode(new Player(10.0f, 0, 100));
+  world.addNode(new Player(NUM_PIXELS / 2, 0, 100));
   world.addNode(new NuclearBlast(40.0f));
 
 }

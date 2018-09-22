@@ -23,9 +23,15 @@ public:
             value = 50;
         }
 
+        virtual ~Node() {}
+
         virtual void tick() = 0;
 
         virtual void render(CRGB pixels[NUM_PIXELS]) = 0;
+
+        virtual bool dead() {
+            return false;
+        }
 
 };
 

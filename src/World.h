@@ -2,8 +2,8 @@
 #define _NODES_H
 
 #include "Node.h"
+#include "constants.h"
 
-#define MAX_NODES 50
 typedef Node* NodePtr;
 
 class World {

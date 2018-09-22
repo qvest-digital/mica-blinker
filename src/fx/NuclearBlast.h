@@ -29,6 +29,10 @@ class NuclearBlast : public Node {
             elapsedFrames++;
         }
 
+        virtual bool dead() {
+            return elapsedFrames >= STAGE_END;
+        }
+
         void addPixelIfInRange(CRGB pixels[NUM_PIXELS], int pos, CHSV color) {
             if (pos >= 0 && pos < NUM_PIXELS) {
                 pixels[pos] += color;
