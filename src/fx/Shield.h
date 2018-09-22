@@ -12,16 +12,19 @@
 class Shield {
 
     uint8_t baseColor = 160;
-    uint8_t currentColor = baseColor;
+    uint8_t currentColor;
 
     uint8_t baseValue = 0;
-    uint8_t currentValue = baseValue;
+    uint8_t currentValue;
 
-    uint8_t frameCounter = 0;
+    uint8_t frameCounter;
 
     public:
 
         Shield() {
+            currentColor = baseColor;
+            currentValue = baseValue;
+            frameCounter = 0;
         }
 
         void addPixelIfInRange(CRGB pixels[NUM_PIXELS], int pos, CHSV color) {
@@ -49,7 +52,6 @@ class Shield {
                 currentColor = baseColor;
                 currentValue = baseValue;
             }
-
 
             uint16_t pos = static_cast<uint16_t>(lround(position));
             
