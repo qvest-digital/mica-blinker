@@ -41,10 +41,10 @@ class World {
         }
     }
 
-    void render(CRGB frameBuffer[NUM_PIXELS]) {
+    void render(const Canvas& canvas) {
         for(uint16_t i=0; i<MAX_NODES; i++) {
             if (nodes[i] != NULL) {
-                nodes[i]->render(frameBuffer);
+                nodes[i]->render(canvas);
             }
         }
     }
