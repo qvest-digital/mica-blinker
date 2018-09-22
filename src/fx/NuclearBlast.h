@@ -17,7 +17,7 @@ class NuclearBlast : public Node {
     enum {
         STAGE_EXPANSION = 0,
         STAGE_SHOCKWAVE = STAGE_EXPANSION + (MAX_FPS / 2),
-        STAGE_END = STAGE_SHOCKWAVE + 2*NUM_PIXELS + 10
+        STAGE_END = STAGE_SHOCKWAVE + NUM_PIXELS*2
     };
 
     public:
@@ -27,6 +27,12 @@ class NuclearBlast : public Node {
 
         virtual void tick() {
             elapsedFrames++;
+        }
+
+        void addPixelIfInRange(CRGB pixels[NUM_PIXELS], int pos, CHSV color) {
+            if (pos >= 0 && pos < NUM_PIXELS) {
+                pixels[pos] += color;
+            }
         }
 
         void setPixelIfInRange(CRGB pixels[NUM_PIXELS], int pos, CHSV color) {
@@ -43,12 +49,12 @@ class NuclearBlast : public Node {
               long brightness = map(elapsedFrames, 0, STAGE_SHOCKWAVE, 0, 255);
               long size = map(elapsedFrames, 0, STAGE_SHOCKWAVE, 0, 3);
               for (int i=0; i<=size; i++) {
-                setPixelIfInRange(pixels, pos+i, CHSV(0, 0, brightness));
-                setPixelIfInRange(pixels, pos-i, CHSV(0, 0, brightness));
+                addPixelIfInRange(pixels, pos+i, CHSV(0, 0, brightness));
+                addPixelIfInRange(pixels, pos-i, CHSV(0, 0, brightness));
               }
             } else if (elapsedFrames < STAGE_END) {
               // stage: SHOCKWAVE
-              // center fades out
+              // explosion center fades out
               long brightness = constrain(
                   map(elapsedFrames, STAGE_SHOCKWAVE, STAGE_SHOCKWAVE + (STAGE_END - STAGE_SHOCKWAVE) / 4, 255, 0),
                   0, 255);
@@ -56,16 +62,16 @@ class NuclearBlast : public Node {
                   map(elapsedFrames, STAGE_SHOCKWAVE, STAGE_SHOCKWAVE + (STAGE_END - STAGE_SHOCKWAVE) / 4, 3, 0),
                   0, 3);
               for (int i=0; i<=size; i++) {
-                setPixelIfInRange(pixels, pos+i, CHSV(0, 0, brightness));
-                setPixelIfInRange(pixels, pos-i, CHSV(0, 0, brightness));
+                addPixelIfInRange(pixels, pos+i, CHSV(0, 0, brightness));
+                addPixelIfInRange(pixels, pos-i, CHSV(0, 0, brightness));
               }
               // shockwave travels from center to edges
-              long dist = map(elapsedFrames, STAGE_SHOCKWAVE, STAGE_END, 4, NUM_PIXELS);
+              long dist = map(elapsedFrames, STAGE_SHOCKWAVE, STAGE_END, 3, NUM_PIXELS);
               for (int i=dist; i>=dist-10; i--) {
                 if (i >= 4) {
                   long brightness = map(i, dist-10, dist, 10, 100);
-                  setPixelIfInRange(pixels, pos+i, CHSV(0, 0, brightness));
-                  setPixelIfInRange(pixels, pos-i, CHSV(0, 0, brightness));
+                  addPixelIfInRange(pixels, pos+i, CHSV(0, 0, brightness));
+                  addPixelIfInRange(pixels, pos-i, CHSV(0, 0, brightness));
                 }
               }
             }

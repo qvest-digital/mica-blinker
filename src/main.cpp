@@ -5,8 +5,8 @@
 #include "Player.h"
 #include "fx/NuclearBlast.h"
 
-Player player = Player(0, 0.25f, 100);
-// NuclearBlast blast = NuclearBlast(40.0f);
+Player player = Player(10.0f, 0, 100);
+NuclearBlast blast = NuclearBlast(40.0f);
 
 CRGB frameBuffer[NUM_PIXELS];
 
@@ -22,7 +22,7 @@ void setup() {
   pinMode(PIN_BUTTON_RIGHT, INPUT_PULLUP);
 
   // smoke test
-  player.move(Direction::FORWARD);
+  // player.move(Direction::FORWARD);
 }
 
 void handleInputs() {
@@ -48,8 +48,8 @@ void loop() {
 
   player.tick();
   player.render(frameBuffer);
-  // blast.tick();
-  // blast.render(frameBuffer);
+  blast.tick();
+  blast.render(frameBuffer);
 
   FastLED.show();
 
