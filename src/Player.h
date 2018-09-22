@@ -28,25 +28,19 @@ class Player : public Node {
         }
     
         virtual void tick() {
-
-            switch(direction) {
-
-                case FORWARD:
-                position += velocity;
-                break;
-
-                case BACKWARD:
-                position -= velocity;
-                break;
-
-                default:
-                break;
+            if (digitalRead(PIN_BUTTON_LEFT) == LOW) {
+                direction = BACKWARD;
+            } else if (digitalRead(PIN_BUTTON_RIGHT) == LOW) {
+                direction = FORWARD;
+            } else {
+                direction = NO_MOVE;
             }
         }
 
         virtual void render(const Canvas& canvas) {
-
-            shield.render(canvas, position, direction);
+            
+            if (direction != NO_MOVE)
+             shield.render(canvas, position, direction);
             
             uint8_t pos = static_cast<uint8_t>(lround(position));
             if(pos > NUM_PIXELS - 1) {
