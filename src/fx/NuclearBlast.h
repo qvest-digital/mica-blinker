@@ -57,7 +57,7 @@ class NuclearBlast : public Node {
               // explosion center fades out
               long brightness = constrain(
                   map(elapsedFrames, STAGE_SHOCKWAVE, STAGE_SHOCKWAVE + (STAGE_END - STAGE_SHOCKWAVE) / 4, 255, 0),
-                  0, 255);
+                  0, 160);
               long size = constrain(
                   map(elapsedFrames, STAGE_SHOCKWAVE, STAGE_SHOCKWAVE + (STAGE_END - STAGE_SHOCKWAVE) / 4, 3, 0),
                   0, 3);

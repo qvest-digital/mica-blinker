@@ -18,14 +18,16 @@ public:
     uint8_t saturation;
     uint8_t value;
 
-        Node(const float position, const float velocity, const uint8_t hue): position(position), velocity(velocity), hue(hue) {
-            saturation = 255;
-            value = 50;
-        }
+    Node(const float position, const float velocity, const uint8_t hue): position(position), velocity(velocity), hue(hue) {
+        saturation = 255;
+        value = 50;
+    }
 
-        virtual void tick() = 0;
+    virtual void tick() = 0;
 
-        virtual void render(CRGB pixels[NUM_PIXELS]) = 0;
+    virtual void render(CRGB pixels[NUM_PIXELS]) = 0;
+
+    uint8_t getPos() { return position; }
 
 };
 
