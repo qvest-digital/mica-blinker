@@ -23,6 +23,13 @@ class World {
         }
     }
 
+    void reset() {
+        // deletes all nodes and resets world params
+        for (uint16_t i=0; i<MAX_NODES; i++) {
+            nodes[i] = NULL;
+        }
+    }
+
     void cleanup() {
         // iterate over node array and remove "dead" nodes
         for (uint16_t i=0; i<MAX_NODES; i++) {

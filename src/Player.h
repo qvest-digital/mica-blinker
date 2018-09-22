@@ -13,7 +13,6 @@
 class Player : public Node {
 
     
-
     public:
 
         Direction direction;

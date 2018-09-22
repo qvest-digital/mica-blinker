@@ -6,10 +6,16 @@
 #include "World.h"
 #include "fx/NuclearBlast.h"
 #include "fx/Shield.h"
+#include "fx/GameState.h"
+
+void initializeGameOverWorld();
+void initializePlayingWorld();
+void initializeIdleWorld();
 
 CRGB frameBuffer[NUM_PIXELS];
 
 World world = World();
+GameState gameState;
 
 void setup() {
   CLEDController& ledController = FastLED.addLeds<SK9822, BGR>(frameBuffer, NUM_PIXELS);
@@ -22,9 +28,11 @@ void setup() {
   pinMode(PIN_BUTTON_LEFT, INPUT_PULLUP);
   pinMode(PIN_BUTTON_RIGHT, INPUT_PULLUP);
 
-  // set player to center
-  world.addNode(new Player(NUM_PIXELS / 2, 0, 100));
-  // world.addNode(new NuclearBlast(40.0f));
+  // world setup IDLE
+  gameState = IDLE;
+
+  // intialize world
+  initializePlayingWorld();
 }
 
 void handleInputs() {
@@ -47,6 +55,15 @@ void loop() {
 
   // reset all leds
   fill_solid(frameBuffer, NUM_PIXELS, CRGB::Black);
+  long seconds = lround(startMicros / 5000000);
+  uint8_t modulo = seconds % 2;
+  Serial.println(startMicros + " testing " +  modulo);
+  switch(modulo) {
+    case 0:
+      initializeGameOverWorld();
+    case 1:
+      initializePlayingWorld();
+  }
 
   world.tick();
   world.cleanup();
@@ -65,4 +82,21 @@ void loop() {
       delayMicroseconds(FRAME_MICROS - durationMicros);
     }
   }
+}
+
+void initializePlayingWorld() {
+  world = World();
+  gameState = PLAYING;
+  world.addNode(new Player(NUM_PIXELS / 2, 0, 100));
+}
+
+void initializeGameOverWorld() {
+  world = World();
+  gameState = GAMEOVER;
+  world.addNode(new NuclearBlast(40.0f));
+}
+
+void initializeIdleWorld() {
+  world = World();
+  gameState = IDLE;
 }
