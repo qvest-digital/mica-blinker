@@ -41,18 +41,27 @@ class Game {
         Player* player = world.getPlayer();
         NodePtr* nodes = world.getNodes();
         
-        uint8_t playerPos = lround(player->getPosition());
+        // player->shieldHit(160);
 
-        for (uint16_t i = 0; MAX_NODES; i++) {
+        uint16_t playerPos = lround(player->getPosition());
+        Direction playerDir = player->direction;
+        
+        for (uint16_t i = 0; i < MAX_NODES; i++) {
             NodePtr node = nodes[i];
-            if (node != dynamic_cast<Node*>(player) && node != NULL) {
-                uint8_t nodePos = lround(node->getPosition());
+            if (node != NULL && node != player) {
+                uint16_t nodePos = lround(node->getPosition());
 
-                if (nodePos < )
-                Direction playerDir = player->direction;
                 if (playerPos == nodePos) {
-                    player.hit();
-                    
+                    Serial.println("player hit");
+        //         //     player->hue = 0;
+                    player->shieldHit(160);
+        //         //     // node.die();
+        //         // } else
+        //         // if (playerDir == FORWARD /*&& playerPos + 3 == nodePos*/) {
+        //             // player->hue = 96;
+        //             // node->velocity = abs(node->velocity);
+        //         // } else {
+        //         //     player->hue = 160;
                 }
             }
         }

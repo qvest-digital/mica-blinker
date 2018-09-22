@@ -14,6 +14,10 @@ class World {
 
     public:
 
+    World() {
+        memset(nodes, NULL, MAX_NODES * sizeof(NodePtr));
+    }
+
     void addPlayer(Player* player) {
         player = player;
         addNode(player);

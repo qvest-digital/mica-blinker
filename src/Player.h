@@ -49,6 +49,10 @@ class Player : public Node {
             canvas.setPixel(pos, CHSV(hue, saturation, value));
         }
 
+        void shieldHit(uint8_t hue) {
+            shield.hit(hue);
+        }
+
 
 };
 

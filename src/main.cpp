@@ -29,11 +29,11 @@ void setup() {
 
 void handleInputs() {
 
-  if (digitalRead(PIN_BUTTON_LEFT) == LOW) {
-    Serial.println("LEFT");
-  } else if (digitalRead(PIN_BUTTON_RIGHT) == LOW) {
-    Serial.println("RIGHT");
-  }
+  // if (digitalRead(PIN_BUTTON_LEFT) == LOW) {
+  //   Serial.println("LEFT");
+  // } else if (digitalRead(PIN_BUTTON_RIGHT) == LOW) {
+  //   Serial.println("RIGHT");
+  // }
 }
 
 static const unsigned long FRAME_MICROS = 1000000 / MAX_FPS;
