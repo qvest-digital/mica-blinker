@@ -3,12 +3,12 @@
 
 #include "constants.h"
 #include "Player.h"
+#include "World.h"
 #include "fx/NuclearBlast.h"
 
-Player player = Player(10.0f, 0, 100);
-NuclearBlast blast = NuclearBlast(40.0f);
-
 CRGB frameBuffer[NUM_PIXELS];
+
+World world = World();
 
 void setup() {
   CLEDController& ledController = FastLED.addLeds<SK9822, BGR>(frameBuffer, NUM_PIXELS);
@@ -21,8 +21,10 @@ void setup() {
   pinMode(PIN_BUTTON_LEFT, INPUT_PULLUP);
   pinMode(PIN_BUTTON_RIGHT, INPUT_PULLUP);
 
-  // smoke test
-  // player.move(Direction::FORWARD);
+  // set player to center
+  world.addNode(new Player(10.0f, 0, 100));
+  world.addNode(new NuclearBlast(40.0f));
+
 }
 
 void handleInputs() {
@@ -46,10 +48,9 @@ void loop() {
   // reset all leds
   fill_solid(frameBuffer, NUM_PIXELS, CRGB::Black);
 
-  player.tick();
-  player.render(frameBuffer);
-  blast.tick();
-  blast.render(frameBuffer);
+  world.tick();
+  world.cleanup();
+  world.render(frameBuffer);
 
   FastLED.show();
 
