@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "World.h"
 #include "fx/NuclearBlast.h"
+#include "fx/Shield.h"
 
 CRGB frameBuffer[NUM_PIXELS];
 
