@@ -4,12 +4,14 @@
 #include "constants.h"
 #include "Player.h"
 #include "World.h"
+#include "Game.h"
 #include "fx/NuclearBlast.h"
 #include "fx/Shield.h"
 
 CRGB frameBuffer[NUM_PIXELS];
 
 World world = World();
+Game game = Game();
 
 void setup() {
   CLEDController& ledController = FastLED.addLeds<SK9822, BGR>(frameBuffer, NUM_PIXELS);
@@ -47,6 +49,8 @@ void loop() {
 
   // reset all leds
   fill_solid(frameBuffer, NUM_PIXELS, CRGB::Black);
+
+  game.tick(world);
 
   world.tick();
   world.cleanup();

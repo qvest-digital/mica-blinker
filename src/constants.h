@@ -10,4 +10,9 @@
 #define PIN_BUTTON_LEFT 3           // digital pin D3
 #define PIN_BUTTON_RIGHT 5          // digital pin D5
 
+#define MIN_PROJECTILE_VELOCITY 1
+#define MAX_PROJECTILE_VELOCITY 100
+
+#define GAME_DURATION 120
+
 #endif
