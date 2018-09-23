@@ -6,8 +6,6 @@
 #include "Player.h"
 #include "World.h"
 #include "Game.h"
-#include "fx/NuclearBlast.h"
-#include "fx/Shield.h"
 
 World world;
 Canvas canvas;
@@ -24,16 +22,6 @@ void setup() {
 
   // set player to center
   world.addPlayer(new Player(NUM_PIXELS / 2, 0, 100));
-  // world.addNode(new NuclearBlast(40.0f));
-}
-
-void handleInputs() {
-
-  // if (digitalRead(PIN_BUTTON_LEFT) == LOW) {
-  //   Serial.println("LEFT");
-  // } else if (digitalRead(PIN_BUTTON_RIGHT) == LOW) {
-  //   Serial.println("RIGHT");
-  // }
 }
 
 static const unsigned long FRAME_MICROS = 1000000 / MAX_FPS;
@@ -43,19 +31,17 @@ void loop() {
 
   /////////////////////////////////////////////////////////////////////////////
 
-  handleInputs();
-
-  // reset all leds
-  canvas.clear();
-
+  // let all objects move and interact
   game.tick(world);
-
   world.tick();
   game.detectCollisions(world);
 
+  // remove "dead" objects from the world
   world.cleanup();
-  world.render(canvas);
 
+  // reset canvas, render world and update LEDs
+  canvas.clear();
+  world.render(canvas);
   canvas.show();
 
   //////////////////////////////////////////////////////////////////////////////
