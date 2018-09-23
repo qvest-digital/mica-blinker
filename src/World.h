@@ -15,12 +15,7 @@ class World {
     public:
 
     World() {
-        memset(nodes, NULL, MAX_NODES * sizeof(NodePtr));
-    }
-
-    void addPlayer(Player* player) {
-        this -> player = player;
-        addNode(player);
+        // memset(nodes, NULL, MAX_NODES * sizeof(NodePtr));
     }
 
     void addNode(Node* node) {
@@ -61,7 +56,9 @@ class World {
 
     NodePtr* getNodes() { return nodes; }
 
+    void setPlayer(Player* player) { this->player = player; }
     Player* getPlayer() { return player; }
+
 };
 
 #endif

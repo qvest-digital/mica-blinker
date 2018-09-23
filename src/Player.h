@@ -12,7 +12,7 @@
 
 class Player : public Node {
 
-    bool dead = false;
+    bool _dead = false;
 
     public:
 
@@ -38,7 +38,11 @@ class Player : public Node {
         }
 
         void die() {
-            // this->dead = true;
+            this->_dead = true;
+        }
+
+        virtual bool dead() {
+            return this->_dead;
         }
 
         virtual void render(const Canvas& canvas) {
@@ -58,7 +62,6 @@ class Player : public Node {
         void shieldHit(uint8_t hue) {
             shield.hit(hue);
         }
-
 
 };
 

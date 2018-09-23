@@ -1,12 +1,15 @@
-#ifndef _GAME_H
-#define _GAME_H
+#ifndef _PLAYING_H
+#define _PLAYING_H
 
-#include "constants.h"
-#include "World.h"
-#include "Projectile.h"
-#include "fx/NuclearBlast.h"
+#include "State.h"
+#include "GameOver.h"
 
-class Game {
+#include "../constants.h"
+#include "../World.h"
+#include "../Projectile.h"
+#include "../Player.h"
+
+class Playing : public State {
 
     long frameCounter = 0;
 
@@ -20,33 +23,11 @@ class Game {
         return velocity;
     }
 
-    public:
-
-    bool gameOver = false;
-
-    void tick(World& world) {
-        // spawn projectiles from left:
-        if (spawn()) {
-            Projectile *projectile = new Projectile(0.0f, velocity(), random8());
-            world.addNode(projectile);
-        }
-        // spawn projectiles from right:
-        if (spawn()) {
-            Projectile *projectile = new Projectile(NUM_PIXELS-1, -velocity(), random8());
-            world.addNode(projectile);
-        }
-
-        // increment counter
-        frameCounter++;
-    }
-
     void detectCollisions(World& world) {
 
         Player* player = world.getPlayer();
         NodePtr* nodes = world.getNodes();
         
-        // player->shieldHit(160);
-
         uint8_t playerPos = NUM_PIXELS / 2;
         Direction playerDir = player->direction;
         
@@ -65,10 +46,44 @@ class Game {
                     node->position += 10 * node->velocity;
                 } else if (playerPos == nodePos && !gameOver) {
                     gameOver = true;
-                    world.addNode(new NuclearBlast(playerPos));
-                    player->die();
                 }
             }
+        }
+    }
+
+    public:
+
+    Playing(World &world) : State(world) {
+        // put a new player in the center
+        Player *player = new Player(NUM_PIXELS / 2, 0, 100);
+        world.addNode(player);
+        world.setPlayer(player);
+    }
+
+    bool gameOver = false;
+
+    State *tick(World& world) {
+
+        // spawn projectiles from left:
+        if (spawn()) {
+            Projectile *projectile = new Projectile(0.0f, velocity(), random8());
+            world.addNode(projectile);
+        }
+        // spawn projectiles from right:
+        if (spawn()) {
+            Projectile *projectile = new Projectile(NUM_PIXELS-1, -velocity(), random8());
+            world.addNode(projectile);
+        }
+
+        detectCollisions(world);
+
+        // increment counter
+        frameCounter++;
+
+        if (gameOver) {
+            return new GameOver(world);
+        } else {
+            return this;
         }
     }
 
