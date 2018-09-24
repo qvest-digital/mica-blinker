@@ -25,7 +25,6 @@ void setup() {
 
   // start application in idle mode
   state = new Idle(world);
-  // state = new Playing(world);
 }
 
 static const unsigned long FRAME_MICROS = 1000000 / MAX_FPS;

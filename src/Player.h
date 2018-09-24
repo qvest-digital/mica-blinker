@@ -52,12 +52,8 @@ class Player : public Node {
             }
             
             uint8_t pos = static_cast<uint8_t>(lround(position));
-            // if (pos > NUM_PIXELS - 1) {
-            //     pos = 0;
-            //     position = 0;
-            // }
 
-            canvas.setPixel(pos, CHSV(hue, saturation, value));
+            canvas.setPixel(pos, CHSV(0, 0, 30));
         }
 
         void shieldHit(uint8_t hue) {
