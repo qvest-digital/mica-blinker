@@ -1,8 +1,9 @@
-#ifndef _NODES_H
-#define _NODES_H
+#ifndef _WORLD_H
+#define _WORLD_H
 
 #include "Node.h"
 #include "constants.h"
+#include "Player.h"
 
 typedef Node* NodePtr;
 
@@ -55,6 +56,16 @@ class World {
     }
 
     NodePtr* getNodes() { return nodes; }
+
+    uint16_t getNodeCount() {
+        uint16_t count = 0;
+        for(uint16_t i=0; i<MAX_NODES; i++) {
+            if (nodes[i] != NULL) {
+                count++;
+            }
+        }
+        return count;
+    }
 
     void setPlayer(Player* player) { this->player = player; }
     Player* getPlayer() { return player; }

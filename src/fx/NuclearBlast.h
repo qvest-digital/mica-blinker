@@ -1,13 +1,10 @@
-#ifndef _NUCLEAR_EXPLOSION_H
-#define _NUCLEAR_EXPLOSION_H
+#ifndef _NUCLEAR_BLAST_H
+#define _NUCLEAR_BLAST_H
 
-// #include <stdint.h>
 #include <math.h>
 #include <FastLED.h>
 
-// #include "constants.h"
 #include "../Node.h"
-// #include "Direction.h"
 
 class NuclearBlast : public Node {
 
@@ -33,18 +30,6 @@ class NuclearBlast : public Node {
             return elapsedFrames >= STAGE_END;
         }
 
-        // void addPixelIfInRange(CRGB pixels[NUM_PIXELS], int pos, CHSV color) {
-        //     if (pos >= 0 && pos < NUM_PIXELS) {
-        //         pixels[pos] += color;
-        //     }
-        // }
-
-        // void setPixelIfInRange(CRGB pixels[NUM_PIXELS], int pos, CHSV color) {
-        //     if (pos >= 0 && pos < NUM_PIXELS) {
-        //         pixels[pos] = color;
-        //     }
-        // }
-
         virtual void render(const Canvas& canvas) {
 
             uint16_t pos = static_cast<uint16_t>(lround(position));
@@ -54,12 +39,8 @@ class NuclearBlast : public Node {
               long brightness = map(elapsedFrames, 0, STAGE_SHOCKWAVE, 0, 255);
               long size = map(elapsedFrames, 0, STAGE_SHOCKWAVE, 0, 3);
               for (int i=0; i<=size; i++) {
-
                 canvas.addPixel(pos+i, CHSV(0, 0, brightness));
                 canvas.addPixel(pos-i, CHSV(0, 0, brightness));
-
-                //addPixelIfInRange(pixels, pos+i, CHSV(0, 0, brightness));
-                //addPixelIfInRange(pixels, pos-i, CHSV(0, 0, brightness));
               }
             } else if (elapsedFrames < STAGE_END) {
               // stage: SHOCKWAVE
@@ -73,8 +54,6 @@ class NuclearBlast : public Node {
               for (int i=0; i<=size; i++) {
                  canvas.addPixel(pos+i, CHSV(0, 0, brightness));
                  canvas.addPixel(pos-i, CHSV(0, 0, brightness));
-                // addPixelIfInRange(pixels, pos+i, CHSV(0, 0, brightness));
-                // addPixelIfInRange(pixels, pos-i, CHSV(0, 0, brightness));
               }
               // shockwave travels from center to edges
               long dist = map(elapsedFrames, STAGE_SHOCKWAVE, STAGE_END, 3, NUM_PIXELS);
@@ -83,8 +62,6 @@ class NuclearBlast : public Node {
                   long brightness = map(i, dist-10, dist, 10, 100);
                    canvas.addPixel(pos+i, CHSV(0, 0, brightness));
                    canvas.addPixel(pos-i, CHSV(0, 0, brightness));
-                //   addPixelIfInRange(pixels, pos+i, CHSV(0, 0, brightness));
-                //   addPixelIfInRange(pixels, pos-i, CHSV(0, 0, brightness));
                 }
               }
             }

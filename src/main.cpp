@@ -5,6 +5,7 @@
 #include "Canvas.h"
 #include "Player.h"
 #include "World.h"
+
 #include "state/Playing.h"
 #include "state/Idle.h"
 
@@ -23,8 +24,8 @@ void setup() {
   pinMode(PIN_BUTTON_RIGHT, INPUT_PULLUP);
 
   // start application in idle mode
-  // state = new Idle(world);
-  state = new Playing(world);
+  state = new Idle(world);
+  // state = new Playing(world);
 }
 
 static const unsigned long FRAME_MICROS = 1000000 / MAX_FPS;

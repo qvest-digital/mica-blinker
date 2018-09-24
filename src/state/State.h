@@ -5,7 +5,7 @@
 
 class State {
 
-public:
+    public:
 
     State(World &world) { }
 

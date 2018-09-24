@@ -1,11 +1,9 @@
 #ifndef _SHIELD_H
 #define _SHIELD_H
 
-// #include <stdint.h>
 #include <math.h>
 #include <FastLED.h>
 
-// #include "constants.h"
 #include "../Node.h"
 #include "Direction.h"
 
