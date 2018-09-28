@@ -17,6 +17,14 @@ namespace Keys
     };
 }
 
+static void initInputs() {
+  // initialize digital pins for input
+  pinMode(PIN_BUTTON_LEFT, INPUT_PULLUP);
+  pinMode(PIN_BUTTON_RIGHT, INPUT_PULLUP);
+  pinMode(PIN_BUTTON_FIRE_1, INPUT_PULLUP);
+  pinMode(PIN_BUTTON_FIRE_2, INPUT_PULLUP);
+}
+
 static bool isPressed(Keys::Key key)
 {
     switch(key)

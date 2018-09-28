@@ -31,7 +31,7 @@ State *Idle::tick(World& world)
         world.addNode(projectile);
     }
 
-    if (isPressed(Keys::LEFT_FIRE) || isPressed(Keys::RIGHT_FIRE)) {
+    if (isPressed(Keys::LEFT/*_FIRE*/) || isPressed(Keys::RIGHT/*_FIRE*/)) {
         return new Playing(world);
     } else {
         return this;

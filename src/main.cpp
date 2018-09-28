@@ -5,7 +5,7 @@
 #include "Canvas.h"
 #include "Player.h"
 #include "World.h"
-
+#include "io/input.h"
 #include "state/Playing.h"
 #include "state/Idle.h"
 
@@ -19,10 +19,8 @@ void setup() {
   // setup serial port
   Serial.begin(9600); 
 
-  // initialize digital pins for input
-  pinMode(PIN_BUTTON_LEFT, INPUT_PULLUP);
-  pinMode(PIN_BUTTON_RIGHT, INPUT_PULLUP);
-
+  initInputs();
+ 
   // start application in idle mode
   state = new Idle(world);
 }

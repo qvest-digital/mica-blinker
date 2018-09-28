@@ -6,8 +6,8 @@
 
 #define MAX_NODES 50                // maximum number of Nodes in the world
 
-#define PIN_BUTTON_LEFT 3           // digital pin D3
-#define PIN_BUTTON_RIGHT 5          // digital pin D5
+#define PIN_BUTTON_LEFT 5           // digital pin D5
+#define PIN_BUTTON_RIGHT 3          // digital pin D3
 #define PIN_BUTTON_FIRE_1 6         // digital pin D6
 #define PIN_BUTTON_FIRE_2 7         // digital pin D7
 

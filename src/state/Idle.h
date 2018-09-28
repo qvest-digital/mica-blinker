@@ -7,8 +7,8 @@
 class Idle : public State
 {
 
-    boolean Idle::spawn();
-    float Idle::velocity();
+    boolean spawn();
+    float velocity();
 
     public:
 
