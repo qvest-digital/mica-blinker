@@ -12,8 +12,8 @@ namespace Keys
         RIGHT = PIN_BUTTON_RIGHT,
         BOTTOM,
         LEFT = PIN_BUTTON_LEFT,
-        LEFT_FIRE,
-        RIGHT_FIRE
+        LEFT_FIRE = PIN_BUTTON_FIRE_1,
+        RIGHT_FIRE = PIN_BUTTON_FIRE_2
     };
 }
 

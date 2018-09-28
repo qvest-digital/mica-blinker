@@ -31,7 +31,7 @@ State *Idle::tick(World& world)
         world.addNode(projectile);
     }
 
-    if (isPressed(Keys::LEFT_FIRE) || isPressed(Keys::RIGHT_FIRE) || random16() <= 40) {
+    if (isPressed(Keys::LEFT_FIRE) || isPressed(Keys::RIGHT_FIRE)) {
         return new Playing(world);
     } else {
         return this;
