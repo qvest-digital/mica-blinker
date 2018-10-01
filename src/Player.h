@@ -53,7 +53,7 @@ class Player : public Node {
             
             uint8_t pos = static_cast<uint8_t>(lround(position));
 
-            canvas.setPixel(pos, CHSV(0, 0, 30));
+            canvas.setPixel(pos, CHSV(0, 0, 60));
         }
 
         void shieldHit(uint8_t hue) {

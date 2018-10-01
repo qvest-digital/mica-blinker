@@ -6,8 +6,7 @@
 
 boolean Playing::spawn()
 {
-    // long probability = map(frameCounter, 0, MAX_FPS * GAME_DURATION, 1, 16);
-    return random16() < 100;
+    return random16() < PLAYING_SPAWN_RATE;
 }
 
 float Playing::velocity()
