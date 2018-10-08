@@ -5,23 +5,24 @@
 #include "Canvas.h"
 #include "Player.h"
 #include "World.h"
-#include "Game.h"
+#include "io/input.h"
+#include "state/Playing.h"
+#include "state/Idle.h"
 
 World world;
 Canvas canvas;
-Game game;
+
+State *state;
 
 void setup() {
 
   // setup serial port
   Serial.begin(9600); 
 
-  // initialize digital pins for input
-  pinMode(PIN_BUTTON_LEFT, INPUT_PULLUP);
-  pinMode(PIN_BUTTON_RIGHT, INPUT_PULLUP);
-
-  // set player to center
-  world.addPlayer(new Player(NUM_PIXELS / 2, 0, 100));
+  initInputs();
+ 
+  // start application in idle mode
+  state = new Idle(world);
 }
 
 static const unsigned long FRAME_MICROS = 1000000 / MAX_FPS;
@@ -31,10 +32,17 @@ void loop() {
 
   /////////////////////////////////////////////////////////////////////////////
 
-  // let all objects move and interact
-  game.tick(world);
+  // update world  
   world.tick();
-  game.detectCollisions(world);
+
+  // update state
+  State *newState = state->tick(world);
+
+  // change state?
+  if (newState != state) {
+    delete state;
+    state = newState;
+  }
 
   // remove "dead" objects from the world
   world.cleanup();

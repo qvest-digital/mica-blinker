@@ -38,9 +38,9 @@ public:
 
     float getPosition() { return position; }
 
-        virtual bool dead() {
-            return false;
-        }
+    virtual bool dead() {
+        return false;
+    }
 
 };
 

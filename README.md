@@ -38,6 +38,13 @@ For game controls, two push-buttons (or the x-axis of a joystick) are connected 
 
 ## Release Notes / Changelog
 
+### Version 1.0.1 / 2018-09-28
+
+- proper handling of game state
+- code cleanup
+- bugfixes
+- higher velocity to make game more challenging
+
 ### Version 1.0.0 / 2018-09-22
   
-first release shown during the MICA hackathon results presentation
+- first release shown during the MICA hackathon results presentation
