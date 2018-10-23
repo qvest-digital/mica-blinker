@@ -6,12 +6,12 @@
 
 boolean Idle::spawn()
 {
-    return random16() < IDLE_SPAWN_RATE;
+    return random(65536) < IDLE_SPAWN_RATE;
 }
 
 float Idle::velocity()
 {
-    float velocity = map(random8(), 0, 255, MIN_IDLE_VELOCITY, MAX_IDLE_VELOCITY) / PROJECTILE_VELOCITY_DIVIDER;
+    float velocity = map(random(256), 0, 255, MIN_IDLE_VELOCITY, MAX_IDLE_VELOCITY) / PROJECTILE_VELOCITY_DIVIDER;
     return velocity;
 }
 
@@ -21,9 +21,9 @@ State *Idle::tick(World& world)
 {
     if (spawn()) {
         // spawn projectiles from left:
-        // Projectile *projectile = new Projectile(0.0f, velocity(), random8());
+        // Projectile *projectile = new Projectile(0.0f, velocity(), random(256));
         // spawn projectiles from right:
-        Projectile *projectile = new Projectile(NUM_PIXELS - 1, -1.0f * velocity(), random8());
+        Projectile *projectile = new Projectile(NUM_PIXELS - 1, -1.0f * velocity(), random(256));
         world.addNode(projectile);
     }
 

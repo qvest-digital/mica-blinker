@@ -6,12 +6,12 @@
 
 boolean Playing::spawn()
 {
-    return random16() < PLAYING_SPAWN_RATE;
+    return random(65536) < PLAYING_SPAWN_RATE;
 }
 
 float Playing::velocity()
 {
-    float velocity = map(random8(), 0, 255, MIN_PROJECTILE_VELOCITY, MAX_PROJECTILE_VELOCITY) / PROJECTILE_VELOCITY_DIVIDER;
+    float velocity = map(random(256), 0, 255, MIN_PROJECTILE_VELOCITY, MAX_PROJECTILE_VELOCITY) / PROJECTILE_VELOCITY_DIVIDER;
     return velocity;
 }
 
@@ -55,12 +55,12 @@ State *Playing::tick(World& world)
 {
     // spawn projectiles from left:
     if (spawn()) {
-        Projectile *projectile = new Projectile(0.0f, velocity(), random8());
+        Projectile *projectile = new Projectile(0.0f, velocity(), random(256));
         world.addNode(projectile);
     }
     // spawn projectiles from right:
     if (spawn()) {
-        Projectile *projectile = new Projectile(NUM_PIXELS-1, -velocity(), random8());
+        Projectile *projectile = new Projectile(NUM_PIXELS-1, -velocity(), random(256));
         world.addNode(projectile);
     }
 

@@ -20,6 +20,9 @@ void setup() {
   Serial.begin(9600); 
 
   initInputs();
+
+  // seed random number generator from unconnected analog input pin 0:
+  randomSeed(analogRead(0));  
  
   // start application in idle mode
   state = new Idle(world);
