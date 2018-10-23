@@ -28,9 +28,9 @@ class Player : public Node {
         }
     
         virtual void tick() {
-            if (isPressed(Keys::LEFT)) {
+            if (isPressed(Keys::BOTTOM)) {
                 direction = BACKWARD;
-            } else if (isPressed(Keys::RIGHT)) {
+            } else if (isPressed(Keys::TOP)) {
                 direction = FORWARD;
             } else {
                 direction = NO_MOVE;

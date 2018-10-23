@@ -21,11 +21,13 @@ State *Idle::tick(World& world)
 {
     if (spawn()) {
         // spawn projectiles from left:
-        Projectile *projectile = new Projectile(0.0f, velocity(), random8());
+        // Projectile *projectile = new Projectile(0.0f, velocity(), random8());
+        // spawn projectiles from right:
+        Projectile *projectile = new Projectile(NUM_PIXELS - 1, -1.0f * velocity(), random8());
         world.addNode(projectile);
     }
 
-    if (isPressed(Keys::LEFT/*_FIRE*/) || isPressed(Keys::RIGHT/*_FIRE*/)) {
+    if (isPressed(Keys::TOP) || isPressed(Keys::BOTTOM)) {
         return new Playing(world);
     } else {
         return this;
